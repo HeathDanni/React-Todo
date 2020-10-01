@@ -8,7 +8,7 @@ const TodoList = (props) => {
                 <Todo key={todo.id} todo={todo} toggleTodo={props.toggleTodo}/>
             ))
         }
-        <button onClick={props.clearCompleted}>Clear Completed</button>
+        <button onClick={props.clearCompleted} className="clearbutton">Clear Completed</button>
         </div>
     )
 };
