@@ -25,6 +25,21 @@ class App extends React.Component {
     };
   }
 
+  toggleTodo = (todoId) => {
+    console.log(todoId);
+    this.setState({
+      todolist: this.state.todolist.map((todo) => {
+        if (todoId === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          }
+        }
+        return todo;
+      })
+    });
+  };
+
   addTodo = (todoName) => {
     const newTodo = {
       task: todoName,
@@ -40,6 +55,14 @@ class App extends React.Component {
     });
   };
 
+  clearCompleted = e => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      todolist: this.state.todolist.filter((todo) => !todo.completed)
+    });
+  };
+
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
@@ -48,7 +71,9 @@ class App extends React.Component {
       <div>
         <h1>My Todo List</h1>
         <TodoForm addTodo={this.addTodo}/>
-        <TodoList todolist={this.state.todolist}/>
+        <TodoList toggleTodo={this.toggleTodo} 
+          todolist={this.state.todolist}
+          clearCompleted={this.clearCompleted}/>
       </div>
     );
   }
